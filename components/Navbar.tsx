@@ -12,9 +12,9 @@ export function Navbar() {
           <li>
             <Link href='/'>Templates</Link>
           </li>
-          <li>
+          {/* <li>
             <Link href='/'>Build</Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

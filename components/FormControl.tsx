@@ -1,4 +1,5 @@
 import { useForm, useFieldArray, useWatch } from 'react-hook-form';
+import { ResultPage } from './ResultPage';
 
 interface INotesData {
   notes: { noteTitle: string }[];
@@ -18,7 +19,10 @@ export const FormControl = () => {
 
   const onSubmit = (data: INotesData) => console.log(data);
 
-  console.log(useWatch({ control, name: 'notes' }));
+  const obj = useWatch({
+    control,
+    name: 'notes',
+  });
   return (
     <>
       <section className='basis-1/2 h-full border-r-2 py-3 px-5'>
@@ -63,6 +67,8 @@ export const FormControl = () => {
           />
         </form>
       </section>
+
+      <ResultPage control={control} />
     </>
   );
 };

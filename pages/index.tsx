@@ -5,13 +5,13 @@ import styles from '../styles/Home.module.css';
 import { Navbar } from '../components/Navbar';
 import { FormControl } from '../components/FormControl';
 
-import { Lexend } from '@next/font/google';
+import { Inter } from '@next/font/google';
 // If loading a variable font, you don't need to specify the font weight
-const lexend = Lexend({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Notesdone - create your notes</title>
         <meta name='description' content='Note taking app' />
@@ -37,14 +37,14 @@ export default function Home() {
 
 function Main() {
   return (
-    <main className={'h-screen ' + lexend.className}>
+    <main className={' ' + inter.className}>
       <Navbar />
 
-      <div className='flex f-full'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 border min-h-[600px]'>
         <FormControl />
-        <section id='paper_content' className='basis-1/2 py-3 px-5'>
+        {/* <section id='paper_content' className='basis-1/2 py-3 px-5'>
           Paper content
-        </section>
+        </section> */}
       </div>
     </main>
   );
