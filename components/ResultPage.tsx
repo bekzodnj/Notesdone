@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Control, useWatch } from 'react-hook-form';
+import { moviesData } from './moviesData';
 
 interface INotesData {
   notes: { noteTitle: string }[];
@@ -16,38 +17,38 @@ export function ResultPage({ control }: { control: Control<INotesData> }) {
     name: 'notes',
   });
 
-  const arr = Array.from({ length: 40 }, (_, i) => i);
+  const arr = Array.from({ length: 24 }, (_, i) => i);
+
   return (
     <section className='basis-1/2 h-full border-r-2 py-3 px-5'>
       <div
-        data-itemName='paper-content'
-        className='w-[557px] h-[788px] max-h-[788px] border py-8'
+        data-itemname='paper-content'
+        className='w-[557px] h-[788px] max-h-[788px] border py-8 px-8 flex flex-col'
       >
         <h2 className={lexend.className + ' text-2xl font-bold mb-4'}>
-          Happiness Catalogue
+          Marvel Movies Checklist
         </h2>
         <div
-          data-itemName='todo-item-parent'
-          className='flex flex-col flex-wrap border border-yellow-300 items-start h-[450px] w-[450px]'
+          data-itemname='todo-item-wrap'
+          className='flex flex-col content-between flex-wrap border-yellow-600 items-start h-[650px] overflow-hidden'
         >
-          {arr.map((item) => {
+          {moviesData.map((item) => {
             return (
               <div
-                key={item.toString()}
-                className='flex items-start space-x-1 border w-52'
-                data-itemName='todo-item'
+                key={item.id}
+                className='flex items-baseline space-x-2 pt-1 pr-2 border-red-500 w-[240px]'
+                data-itemname='todo-item'
               >
-                <div>
+                <div className='shrink-0 border-fuchsia-800'>
                   <Image
                     src='/images/rect.svg'
                     alt='rectangle icon'
                     width={13}
                     height={13}
-                    className='flex-1'
                   />
                 </div>
-                <p className='text-gray-500 text-sm'>
-                  Going to cycling countryside dasdas dasd
+                <p className='text-gray-500 align-middle  border-cyan-400 text-[14px]'>
+                  {item.title}
                 </p>
               </div>
             );
