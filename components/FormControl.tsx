@@ -36,7 +36,6 @@ export const FormControl = () => {
     register: registerSingle,
     handleSubmit: handleSubmitSingle,
     setValue,
-    setFocus,
   } = useForm<ISingleNote>();
 
   const onSubmitSingle: SubmitHandler<ISingleNote> = (data) => {
@@ -58,18 +57,16 @@ export const FormControl = () => {
   return (
     <>
       <section className='basis-1/2 h-full border-r-2 py-3 px-5 bg-slate-50'>
-        <h2>Get creative</h2>
-
         <div className='relative mb-4'>
           <form onSubmit={handleSubmitSingle(onSubmitSingle)}>
-            <label id='todo-id' className='absolute left-0 top-2'>
+            <label id='todo-id' className='absolute left-1 top-3'>
               {'🪄'}
             </label>
             <input
               {...registerSingle('singleNoteText')}
               defaultValue={''}
-              placeholder='Add a note'
-              className='w-full border-b-2 border-gray-300 pl-7 py-2 focus:outline-none focus:border-gray-500'
+              placeholder='Type and press Enter'
+              className='w-full border border-gray-300 pl-8 py-3 focus:outline-none focus:border-blue-400 rounded transition-colors duration-200'
               maxLength={65}
             />
           </form>
@@ -77,6 +74,7 @@ export const FormControl = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* <img src="images/{ds}" alt="" /> */}
+          <h2>Entered notes</h2>
           <ul className='mb-2'>
             {fields.map((item, index) => {
               return (
@@ -84,14 +82,17 @@ export const FormControl = () => {
                   key={item.id}
                   className='relative [&>button]:hover:visible mb-1 '
                 >
-                  <label id='todo-id' className='absolute left-2 top-[0.6rem]'>
+                  <label
+                    id='todo-id'
+                    className='absolute left-2 top-3 tabular-nums text-sm'
+                  >
                     {index + 1}.
                   </label>
                   <input
                     {...register(`notes.${index}.noteTitle` as const)}
                     defaultValue={item.noteTitle}
-                    placeholder='Enter your todo'
-                    className='w-full border border-gray-300 pl-8 py-2 focus:outline-none focus:border-blue-600 rounded transition-colors duration-200'
+                    placeholder='Edit your note'
+                    className='w-full border border-gray-300 pl-10 py-2 focus:outline-none focus:border-blue-600 rounded transition-colors duration-200'
                     maxLength={65}
                   />
                   <button
@@ -114,10 +115,6 @@ export const FormControl = () => {
           >
             Add new item
           </button>
-          <input
-            type='submit'
-            className='border border-orange-600 rounded-md px-3 py-1 text-orange-600 hover:bg-orange-600 hover:text-white hover:cursor-pointer'
-          />
         </form>
         <hr className='my-8' />
       </section>

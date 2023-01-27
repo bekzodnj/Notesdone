@@ -40,11 +40,11 @@ function Main() {
     <main className={' ' + inter.className}>
       <Navbar />
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 border min-h-[600px]'>
+      <div className='grid grid-cols-1 min-[1160px]:grid-cols-2 border min-h-[600px]'>
         <FormControl />
-        {/* <section id='paper_content' className='basis-1/2 py-3 px-5'>
-          Paper content
-        </section> */}
+        {/* <FormControl />: */}
+        {/* <section /> */}
+        {/* <section /> */}
       </div>
     </main>
   );

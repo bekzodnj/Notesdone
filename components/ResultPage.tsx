@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import { Control, useWatch } from 'react-hook-form';
 import { moviesData } from './moviesData';
-import { useRef } from 'react';
+import { RefObject, useRef } from 'react';
+import { Button } from './common/Button';
 
 interface INotesData {
   notes: { noteTitle: string; id: string }[];
@@ -17,39 +18,10 @@ export function ResultPage({ control }: { control: Control<INotesData> }) {
   });
 
   const ref = useRef<HTMLDivElement>(null);
-  const onDownload = async () => {
-    if (ref.current === null) {
-      return;
-    }
-    try {
-      // dynamically import html2canvas module
-      const toPng = (await import('html-to-image')).toPng;
-
-      // read from source element
-      const sourceDivNode = ref.current as HTMLDivElement;
-      const dataUrl = await toPng(sourceDivNode, {
-        cacheBust: true,
-        backgroundColor: '#fff',
-      });
-
-      // create a new link element and download
-      const link = document.createElement('a');
-      link.download = 'my-image-name.png';
-      link.href = dataUrl;
-      link.click();
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
-    <section className='basis-1/2 h-full border-r-2 py-3 px-3 sm:px-5 bg-slate-50'>
-      <button
-        onClick={onDownload}
-        className='border border-orange-600 rounded-md px-3 py-1 text-orange-600 hover:bg-orange-600 hover:text-white hover:cursor-pointer mb-2'
-      >
-        Download as image
-      </button>
+    <section className=' h-full border-r-2 py-3 px-3 sm:px-5 bg-slate-50'>
+      <Button ref={ref} />
       <div
         ref={ref}
         data-itemname='paper-content'
@@ -74,7 +46,7 @@ export function ResultPage({ control }: { control: Control<INotesData> }) {
                 className='flex items-baseline space-x-2 pt-0.5 sm:pt-1 sm:pr-2 border-red-500 w-[150px] sm:w-[240px]'
                 data-itemname='todo-item'
               >
-                <div className='shrink-0 border-fuchsia-800 align-top'>
+                <div className=' border-fuchsia-800 align-top'>
                   <Image
                     src='/images/Rect.svg'
                     alt='rectangle icon'
@@ -83,7 +55,7 @@ export function ResultPage({ control }: { control: Control<INotesData> }) {
                     className='sm:w-3 sm:h-3'
                   />
                 </div>
-                <p className='text-gray-500  border-cyan-400 text-[9px] sm:text-[14px]'>
+                <p className='text-gray-500 text-[9px] sm:text-[14px]'>
                   {item.noteTitle}
                 </p>
               </div>
@@ -91,7 +63,7 @@ export function ResultPage({ control }: { control: Control<INotesData> }) {
           })}
         </div>
       </div>
-      <pre>length: {todoItems.length}</pre>
+      <pre>Items: {todoItems.length}</pre>
     </section>
   );
 }
