@@ -19,21 +19,25 @@ export function ResultPage({ control }: { control: Control<INotesData> }) {
 
   const ref = useRef<HTMLDivElement>(null);
   const onDownload = async () => {
-    // dynamically import html2canvas module
-    const toPng = (await import('html-to-image')).toPng;
+    try {
+      // dynamically import html2canvas module
+      const toPng = (await import('html-to-image')).toPng;
 
-    // read from source element
-    const sourceDivNode = ref.current as HTMLDivElement;
-    const dataUrl = await toPng(sourceDivNode, {
-      cacheBust: true,
-      backgroundColor: '#fff',
-    });
+      // read from source element
+      const sourceDivNode = ref.current as HTMLDivElement;
+      const dataUrl = await toPng(sourceDivNode, {
+        cacheBust: true,
+        backgroundColor: '#fff',
+      });
 
-    // create a new link element and download
-    const link = document.createElement('a');
-    link.download = 'my-image-name.png';
-    link.href = dataUrl;
-    link.click();
+      // create a new link element and download
+      const link = document.createElement('a');
+      link.download = 'my-image-name.png';
+      link.href = dataUrl;
+      link.click();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
