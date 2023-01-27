@@ -10,7 +10,6 @@ import { DM_Sans } from '@next/font/google';
 // If loading a variable font, you don't need to specify the font weight
 const outfitFont = DM_Sans({ subsets: ['latin'], weight: '700' });
 
-let childRender = 0;
 export function ResultPage({ control }: { control: Control<INotesData> }) {
   const todoItems = useWatch({
     control,
@@ -19,6 +18,9 @@ export function ResultPage({ control }: { control: Control<INotesData> }) {
 
   const ref = useRef<HTMLDivElement>(null);
   const onDownload = async () => {
+    if (ref.current === null) {
+      return;
+    }
     try {
       // dynamically import html2canvas module
       const toPng = (await import('html-to-image')).toPng;
@@ -74,7 +76,7 @@ export function ResultPage({ control }: { control: Control<INotesData> }) {
               >
                 <div className='shrink-0 border-fuchsia-800 align-top'>
                   <Image
-                    src='/images/rect.svg'
+                    src='/images/Rect.svg'
                     alt='rectangle icon'
                     width={9}
                     height={9}
