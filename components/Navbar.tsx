@@ -4,13 +4,13 @@ export function Navbar() {
   return (
     <div className='py-5 px-9 shadow-md text-lg flex justify-between'>
       <div id='logo'>
-        <Link href='/'>Notesdone</Link>
+        <Link href='/'>Notesdone </Link>
       </div>
 
       <div id='menu'>
         <ul className='flex space-x-5'>
           <li>
-            <Link href='/'>Templates</Link>
+            <Link href='/'>Templates (Coming soon)</Link>
           </li>
           {/* <li>
             <Link href='/'>Build</Link>
